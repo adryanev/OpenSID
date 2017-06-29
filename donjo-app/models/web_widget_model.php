@@ -219,6 +219,21 @@
 		if(!$outp) $_SESSION['success']=-1;
 	}
 
+	function get_setting($widget){
+	  // Data di kolom setting dalam format json
+		$setting = $this->db->select('setting')->where('isi',$widget.'.php')->get('widget')->row_array();
+		return json_decode($setting['setting'], true);
+	}
+
+	function update_setting($widget,$setting){
+		$_SESSION['success']=1;
+	  // Simpan semua setting di kolom setting sebagai json
+	  $setting = json_encode($setting);
+	  $data = array('setting'=>$setting);
+		$outp = $this->db->where('isi',$widget.'.php')->update('widget',$data);
+		if(!$outp) $_SESSION['success']=-1;
+	}
+
 	function delete($id=''){
 		$sql  = "DELETE FROM widget WHERE id=? AND jenis_widget <> 1";
 		$outp = $this->db->query($sql,array($id));

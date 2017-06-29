@@ -101,6 +101,27 @@ class web_widget extends CI_Controller{
 		redirect("web_widget");
 	}
 
+	function admin($widget){
+		$header = $this->header_model->get_data();
+		$nav['act'] = 7;
+		$data['form_action'] = site_url("web_widget/update_setting/".$widget);
+		$data['setting'] = $this->web_widget_model->get_setting($widget);
+		$this->load->view('header', $header);
+		$this->load->view('web/nav',$nav);
+		$this->load->view('widgets/admin_'.$widget, $data);
+		$this->load->view('footer');
+	}
+
+	function update_setting($widget){
+		$setting = array(
+		  0=>array('baris'=>1,'kolom'=>1,'judul'=>'Program 1','gambar'=>'gambar1.jpg','tautan'=>'http://sid.bangundesa.info'),
+		  1=>array('baris'=>2,'kolom'=>1,'judul'=>'Program 2','gambar'=>'gambar2.jpg','tautan'=>'http://opensid.info'),
+		  2=>array('baris'=>3,'kolom'=>1,'judul'=>'Program 3','gambar'=>'gambar3.jpg','tautan'=>'http://sid.bangundesa.info/siteman')
+	  );
+	  $this->web_widget_model->update_setting($widget,$setting);
+		redirect("web_widget/admin/$widget");
+	}
+
 	function insert(){
 		$this->web_widget_model->insert();
 		redirect("web_widget");
