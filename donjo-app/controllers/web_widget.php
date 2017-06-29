@@ -113,11 +113,7 @@ class web_widget extends CI_Controller{
 	}
 
 	function update_setting($widget){
-		$setting = array(
-		  0=>array('baris'=>1,'kolom'=>1,'judul'=>'Program 1','gambar'=>'gambar1.jpg','tautan'=>'http://sid.bangundesa.info'),
-		  1=>array('baris'=>2,'kolom'=>1,'judul'=>'Program 2','gambar'=>'gambar2.jpg','tautan'=>'http://opensid.info'),
-		  2=>array('baris'=>3,'kolom'=>1,'judul'=>'Program 3','gambar'=>'gambar3.jpg','tautan'=>'http://sid.bangundesa.info/siteman')
-	  );
+		$setting = $this->input->post('setting');
 	  $this->web_widget_model->update_setting($widget,$setting);
 		redirect("web_widget/admin/$widget");
 	}

@@ -14,7 +14,7 @@
 
 	function get_widget_aktif(){
 
-		$data = $this->db->where('enabled',1)->get('widget')->result_array();
+		$data = $this->db->where('enabled',1)->order_by('urut')->get('widget')->result_array();
 		return $data;
 	}
 
@@ -266,6 +266,7 @@
 		$data['arsip'] = $this->first_artikel_m->arsip_show();
 		$data['aparatur_desa'] = $this->pamong_model->list_data();
 		$data['stat_widget'] = $this->laporan_penduduk_model->list_data(4);
+		$data['sinergitas_program'] = $this->get_setting('sinergitas_program');
 	}
 
 }

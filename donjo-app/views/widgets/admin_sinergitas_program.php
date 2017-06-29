@@ -16,11 +16,25 @@
               </tr>
               <?php foreach($setting as $key=>$program): ?>
                 <tr>
-                  <td><?php echo $program['baris']?></td>
-                  <td><?php echo $program['kolom']?></td>
-                  <td><?php echo $program['judul']?></td>
-                  <td><?php echo $program['gambar']?></td>
-                  <td><?php echo $program['tautan']?></td>
+                  <td>
+                    <select name="setting[<?php echo $key?>][baris]" class="required">
+                      <option value="">Pilih Baris</option>
+                      <?php for($i=1; $i<6; $i++){?>
+                        <option value="<?php echo $i;?>" <?php if($program['baris']==$i){?>selected<?php }?>><?php echo $i;?></option>
+                      <?php }?>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="setting[<?php echo $key?>][kolom]" class="required">
+                      <option value="">Pilih Baris</option>
+                      <?php for($i=1; $i<4; $i++){?>
+                        <option value="<?php echo $i;?>" <?php if($program['kolom']==$i){?>selected<?php }?>><?php echo $i;?></option>
+                      <?php }?>
+                    </select>
+                  </td>
+                  <td><input name="setting[<?php echo $key?>][judul]" type="text" class="inputbox" size="40" value="<?php echo $program['judul']?>"/></td>
+                  <td><input name="setting[<?php echo $key?>][gambar]" type="text" class="inputbox" size="40" value="<?php echo $program['gambar']?>"/></td>
+                  <td><input name="setting[<?php echo $key?>][tautan]" type="text" class="inputbox" size="50" value="<?php echo $program['tautan']?>"/></td>
                 </tr>
               <?php endforeach; ?>
             </table>
