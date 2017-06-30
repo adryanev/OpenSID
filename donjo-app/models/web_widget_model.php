@@ -236,11 +236,19 @@
   	return $berisi;
 	}
 
+  function sort_setting($a,$b) {
+      $keya = str_pad($a['baris'], 2, '0', STR_PAD_LEFT).$a['kolom'];
+      $keyb = str_pad($b['baris'], 2, '0', STR_PAD_LEFT).$b['kolom'];
+      return $keya>$keyb;
+  }
+
 	function update_setting($widget,$setting){
 		$_SESSION['success']=1;
 	  // Hapus setting kosong
 	  $setting = array_filter($setting, array($this,'filter_setting'));
-	  // Simpan semua setting di kolom setting sebagai json
+	  // Sort setting berdasarkan [baris][kolom]
+	  usort($setting, array($this,"sort_setting"));
+ 	  // Simpan semua setting di kolom setting sebagai json
 	  $setting = json_encode($setting);
 	  $data = array('setting'=>$setting);
 		$outp = $this->db->where('isi',$widget.'.php')->update('widget',$data);
