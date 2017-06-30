@@ -225,8 +225,21 @@
 		return json_decode($setting['setting'], true);
 	}
 
+	protected function filter_setting($k){
+  	$berisi = false;
+  	foreach($k as $kolom) {
+  		if($kolom) {
+  			$berisi = true;
+	  		break;
+	  	}
+  	}
+  	return $berisi;
+	}
+
 	function update_setting($widget,$setting){
 		$_SESSION['success']=1;
+	  // Hapus setting kosong
+	  $setting = array_filter($setting, array($this,'filter_setting'));
 	  // Simpan semua setting di kolom setting sebagai json
 	  $setting = json_encode($setting);
 	  $data = array('setting'=>$setting);

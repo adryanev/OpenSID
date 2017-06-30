@@ -14,29 +14,55 @@
                 <th>Gambar</th>
                 <th>Tautan</th>
               </tr>
-              <?php foreach($setting as $key=>$program): ?>
+              <?php $kosong = 20 - count($setting);
+                    $s = 0;?>
+              <?php foreach($setting as $program): ?>
+                <?php $s++; ?>
                 <tr>
                   <td>
-                    <select name="setting[<?php echo $key?>][baris]" class="required">
+                    <select name="setting[<?php echo $s?>][baris]" class="">
                       <option value="">Pilih Baris</option>
-                      <?php for($i=1; $i<6; $i++){?>
+                      <?php for($i=1; $i<11; $i++){?>
                         <option value="<?php echo $i;?>" <?php if($program['baris']==$i){?>selected<?php }?>><?php echo $i;?></option>
                       <?php }?>
                     </select>
                   </td>
                   <td>
-                    <select name="setting[<?php echo $key?>][kolom]" class="required">
-                      <option value="">Pilih Baris</option>
+                    <select name="setting[<?php echo $s?>][kolom]" class="">
+                      <option value="">Pilih Kolom</option>
                       <?php for($i=1; $i<4; $i++){?>
                         <option value="<?php echo $i;?>" <?php if($program['kolom']==$i){?>selected<?php }?>><?php echo $i;?></option>
                       <?php }?>
                     </select>
                   </td>
-                  <td><input name="setting[<?php echo $key?>][judul]" type="text" class="inputbox" size="40" value="<?php echo $program['judul']?>"/></td>
-                  <td><input name="setting[<?php echo $key?>][gambar]" type="text" class="inputbox" size="40" value="<?php echo $program['gambar']?>"/></td>
-                  <td><input name="setting[<?php echo $key?>][tautan]" type="text" class="inputbox" size="50" value="<?php echo $program['tautan']?>"/></td>
+                  <td><input name="setting[<?php echo $s?>][judul]" type="text" class="inputbox" size="40" value="<?php echo $program['judul']?>"/></td>
+                  <td><input name="setting[<?php echo $s?>][gambar]" type="text" class="inputbox" size="40" value="<?php echo $program['gambar']?>"/></td>
+                  <td><input name="setting[<?php echo $s?>][tautan]" type="text" class="inputbox" size="50" value="<?php echo $program['tautan']?>"/></td>
                 </tr>
               <?php endforeach; ?>
+              <?php for($s=count($setting)+1; $s <count($setting)+$kosong; $s++): ?>
+                <tr>
+                  <td>
+                    <select name="setting[<?php echo $s?>][baris]" class="">
+                      <option value="">Pilih Baris</option>
+                      <?php for($i=1; $i<11; $i++){?>
+                        <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                      <?php }?>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="setting[<?php echo $s?>][kolom]" class="">
+                      <option value="">Pilih Kolom</option>
+                      <?php for($i=1; $i<4; $i++){?>
+                        <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                      <?php }?>
+                    </select>
+                  </td>
+                  <td><input name="setting[<?php echo $s?>][judul]" type="text" class="inputbox" size="40" value=""/></td>
+                  <td><input name="setting[<?php echo $s?>][gambar]" type="text" class="inputbox" size="40" value=""/></td>
+                  <td><input name="setting[<?php echo $s?>][tautan]" type="text" class="inputbox" size="50" value=""/></td>
+                </tr>
+              <?php endfor; ?>
             </table>
           </div>
 
