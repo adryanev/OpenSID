@@ -36,7 +36,11 @@
                     </select>
                   </td>
                   <td><input name="setting[<?php echo $s?>][judul]" type="text" class="inputbox" size="40" value="<?php echo $program['judul']?>"/></td>
-                  <td><input name="setting[<?php echo $s?>][gambar]" type="text" class="inputbox" size="40" value="<?php echo $program['gambar']?>"/></td>
+                  <td>
+                    <img src="<?php echo base_url().'desa/upload/widget/'.$program['gambar']?>" alt=""/><br>
+                    <input type="file" name="setting[<?php echo $s?>][gambar]"/>
+                    <span style="color: #aaa;">(Kosongkan jika tidak ingin mengubah gambar)</span>
+                  </td>
                   <td><input name="setting[<?php echo $s?>][tautan]" type="text" class="inputbox" size="50" value="<?php echo $program['tautan']?>"/></td>
                 </tr>
               <?php endforeach; ?>
@@ -59,7 +63,10 @@
                     </select>
                   </td>
                   <td><input name="setting[<?php echo $s?>][judul]" type="text" class="inputbox" size="40" value=""/></td>
-                  <td><input name="setting[<?php echo $s?>][gambar]" type="text" class="inputbox" size="40" value=""/></td>
+                  <td>
+                    <input type="file" name="setting[<?php echo $s?>][gambar]"/>
+                    <span style="color: #aaa;">(Kosongkan jika tidak ingin mengubah gambar)</span>
+                  </td>
                   <td><input name="setting[<?php echo $s?>][tautan]" type="text" class="inputbox" size="50" value=""/></td>
                 </tr>
               <?php endfor; ?>
