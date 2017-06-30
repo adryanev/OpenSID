@@ -33,7 +33,8 @@
           $baris[$program['baris']][$program['kolom']] = $program;
         }
       ?>
-      <?php foreach($baris as $key => $baris_program) : ?>
+      <?php for($b=1; $b<count($baris)+1; $b++) : ?>
+        <?php $baris_program = $baris[$b]?>
         <tr>
           <td>
             <?php $width = 100/count($baris_program)-1?>
@@ -44,7 +45,7 @@
             <?php endforeach; ?>
           </td>
         </tr>
-      <?php endforeach; ?>
+      <?php endfor; ?>
     </table>
   </div>
 </div>
