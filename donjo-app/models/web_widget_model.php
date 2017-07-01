@@ -242,12 +242,35 @@
       return $keya>$keyb;
   }
 
+  function upload_gambar_setting(&$setting){
+  	foreach($setting as $key=>$value) {
+		  $lokasi_file = $_FILES['setting']['tmp_name'][$key+1]['gambar'];
+		  $tipe_file   = $_FILES['setting']['type'][$key+1]['gambar'];
+		  $nama_file   = $_FILES['setting']['name'][$key+1]['gambar'];
+		  $fp = time();
+		  $nama_file   = $fp . "_". str_replace(' ', '-', $nama_file); 	 // normalkan nama file
+			$old_gambar    = $value['old_gambar'];
+			$setting[$key]['gambar'] = $old_gambar;
+			if (!empty($lokasi_file)) {
+				if(in_array($tipe_file, unserialize(MIME_TYPE_GAMBAR))){
+					UploadGambarWidget($nama_file, $lokasi_file, $old_gambar);
+					$setting[$key]['gambar'] = $nama_file;
+				} else {
+					$_SESSION['success'] = -1;
+					$_SESSION['error_msg'] = " -> Jenis file " . $nama_file ." salah: " . $tipe_file;
+				}
+			}
+	  }
+  }
+
 	function update_setting($widget,$setting){
 		$_SESSION['success']=1;
 	  // Hapus setting kosong
 	  $setting = array_filter($setting, array($this,'filter_setting'));
 	  // Sort setting berdasarkan [baris][kolom]
 	  usort($setting, array($this,"sort_setting"));
+	  // Upload semua gambar setting
+	  $this->upload_gambar_setting($setting);
  	  // Simpan semua setting di kolom setting sebagai json
 	  $setting = json_encode($setting);
 	  $data = array('setting'=>$setting);

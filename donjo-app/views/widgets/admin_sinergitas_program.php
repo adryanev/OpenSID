@@ -37,6 +37,7 @@
                   </td>
                   <td><input name="setting[<?php echo $s?>][judul]" type="text" class="inputbox" size="40" value="<?php echo $program['judul']?>"/></td>
                   <td>
+                    <input type="hidden" name="setting[<?php echo $s?>][old_gambar]" value="<?php echo $program['gambar']?>"/>
                     <img src="<?php echo base_url().'desa/upload/widget/'.$program['gambar']?>" alt=""/><br>
                     <input type="file" name="setting[<?php echo $s?>][gambar]"/>
                     <span style="color: #aaa;">(Kosongkan jika tidak ingin mengubah gambar)</span>
