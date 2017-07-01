@@ -236,13 +236,13 @@
   	return $berisi;
 	}
 
-  function sort_setting($a,$b) {
+  function sort_sinergitas_program($a,$b) {
       $keya = str_pad($a['baris'], 2, '0', STR_PAD_LEFT).$a['kolom'];
       $keyb = str_pad($b['baris'], 2, '0', STR_PAD_LEFT).$b['kolom'];
       return $keya>$keyb;
   }
 
-  function upload_gambar_setting(&$setting){
+  function upload_gambar_sinergitas_program(&$setting){
   	foreach($setting as $key=>$value) {
 		  $lokasi_file = $_FILES['setting']['tmp_name'][$key+1]['gambar'];
 		  $tipe_file   = $_FILES['setting']['type'][$key+1]['gambar'];
@@ -267,10 +267,16 @@
 		$_SESSION['success']=1;
 	  // Hapus setting kosong
 	  $setting = array_filter($setting, array($this,'filter_setting'));
-	  // Sort setting berdasarkan [baris][kolom]
-	  usort($setting, array($this,"sort_setting"));
-	  // Upload semua gambar setting
-	  $this->upload_gambar_setting($setting);
+	  switch ($widget) {
+	  	case 'sinergitas_program':
+			  // Sort setting berdasarkan [baris][kolom]
+			  usort($setting, array($this,"sort_sinergitas_program"));
+			  // Upload semua gambar setting
+			  $this->upload_gambar_sinergitas_program($setting);
+	  		break;
+	  	default:
+	  		break;
+	  }
  	  // Simpan semua setting di kolom setting sebagai json
 	  $setting = json_encode($setting);
 	  $data = array('setting'=>$setting);
